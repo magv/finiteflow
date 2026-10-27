@@ -47,6 +47,16 @@ testjson
 *.out*
 *.dat
 
+# python build system
+build/
+*.egg-info/
+hepware/bin/
+hepware/build/
+hepware/include/
+hepware/lib/
+hepware/share/
+hepware/*.done
+
 # these files are generated
 tests_json/tinvsys.json
 pythonapi/_cffi_fflow.c

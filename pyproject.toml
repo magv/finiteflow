@@ -1,0 +1,147 @@
+[project]
+name = "finiteflow"
+description = "FiniteFlow: multivariate functional reconstruction using finite fields and dataflow graphs"
+authors = [{name = "Tiziano Peraro"}]
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE.md"]
+requires-python = ">=3.8"
+dependencies = ["cffi>=1.0"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Topic :: Scientific/Engineering :: Mathematics",
+]
+version = "2.0.0"
+
+[project.urls]
+Homepage = "https://github.com/peraro/finiteflow"
+
+[build-system]
+requires = ["setuptools>=79", "cffi>=1.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+package-dir = {"" = "pythonapi"}
+py-modules = ["fflow"]
+
+[[tool.setuptools.ext-modules]]
+name = "_cffi_fflow"
+language = "c++"
+sources = [
+    "pythonapi/_cffi_fflow.c",
+    "src/alg_functions.cc",
+    "src/alg_laurent.cc",
+    "src/alg_linear_fit.cc",
+    "src/alg_linear_solver.cc",
+    "src/alg_lists.cc",
+    "src/alg_mp_reconstruction.cc",
+    "src/algorithm.cc",
+    "src/alg_reconstruction.cc",
+    "src/analytic_fit.cc",
+    "src/analytic_solver.cc",
+    "src/cached_subgraph.cc",
+    "src/capi.cc",
+    "src/capi_custom_threads.cc",
+    "src/capi_native_ext.cc",
+    "src/debug.cc",
+    "src/eval_count.cc",
+    "src/ffmod.c",
+    "src/ffuhash.c",
+    "src/format.cc",
+    "src/function_cache.cc",
+    "src/gcd.cc",
+    "src/graph.cc",
+    "src/integer_math.cc",
+    "src/json.cc",
+    "src/matrix.cc",
+    "src/mp_functions.cc",
+    "src/mp_gcd.cc",
+    "src/mp_multivariate_reconstruction.cc",
+    "src/multivariate_reconstruction.cc",
+    "src/node_solver.cc",
+    "src/numeric_fit.cc",
+    "src/numeric_solver.cc",
+    "src/ostream.cc",
+    "src/polynomial.cc",
+    "src/primes.cc",
+    "src/ratexpr_parser.cc",
+    "src/ratfun_parser.cc",
+    "src/rational_function.cc",
+    "src/spooky_v2.cc",
+    "src/subgraph.cc",
+    "src/subgraph_fit.cc",
+    "src/subgraph_reconstruct.cc",
+    "src/univariate_reconstruction.cc",
+    "src/WjCryptLib_Sha1.c",
+]
+depends = [
+    "hepware/Makefile",
+    "include/fflow/alg_functions.hh",
+    "include/fflow/alg_laurent.hh",
+    "include/fflow/alg_linear_fit.hh",
+    "include/fflow/alg_linear_solver.hh",
+    "include/fflow/alg_lists.hh",
+    "include/fflow/alg_mp_reconstruction.hh",
+    "include/fflow/algorithm.hh",
+    "include/fflow/alg_reconstruction.hh",
+    "include/fflow/analytic_fit.hh",
+    "include/fflow/analytic_solver.hh",
+    "include/fflow/cached_subgraph.hh",
+    "include/fflow/capi_custom_threads.h",
+    "include/fflow/capi.h",
+    "include/fflow/capi_native_ext.h",
+    "include/fflow/common.hh",
+    "include/fflow/config.hh.in",
+    "include/fflow/debug.hh",
+    "include/fflow/eval_count.hh",
+    "include/fflow/ffmod.h",
+    "include/fflow/format.h",
+    "include/fflow/function_cache.hh",
+    "include/fflow/gcd.hh",
+    "include/fflow/global.hh",
+    "include/fflow/graph.hh",
+    "include/fflow/integer_math.hh",
+    "include/fflow/json.hh",
+    "include/fflow/matrix.hh",
+    "include/fflow/mp_common.hh",
+    "include/fflow/mp_functions.hh",
+    "include/fflow/mp_gcd.hh",
+    "include/fflow/mp_multivariate_reconstruction.hh",
+    "include/fflow/multivariate_reconstruction_details.hh",
+    "include/fflow/multivariate_reconstruction.hh",
+    "include/fflow/node_solver.hh",
+    "include/fflow/numeric_fit.hh",
+    "include/fflow/numeric_solver.hh",
+    "include/fflow/ostream.h",
+    "include/fflow/polynomial.hh",
+    "include/fflow/primes.hh",
+    "include/fflow/ratexpr_parser.hh",
+    "include/fflow/ratfun_parser.hh",
+    "include/fflow/rational_function.hh",
+    "include/fflow/refcounted_ptr.hh",
+    "include/fflow/shared_array.hh",
+    "include/fflow/small_vector.hh",
+    "include/fflow/subgraph_fit.hh",
+    "include/fflow/subgraph.hh",
+    "include/fflow/subgraph_reconstruct.hh",
+    "include/fflow/thread_pool.hh",
+    "include/fflow/univariate_reconstruction.hh",
+    "pythonapi/fflow_build.py",
+    "src/ff_prime_list.hh",
+    "src/ffuhash.h",
+    "src/spooky_v2.hh",
+    "src/WjCryptLib_Sha1.h",
+]
+include-dirs = ["include", "hepware/include", "hepware/include/flint"]
+libraries = ["flint", "gmp"]
+extra-compile-args = [
+    "-fno-exceptions",
+    "-DFFLOW_USE_FLINT=1",
+    "-Ihepware/include",
+    "-Ihepware/include/flint",
+    "-fdata-sections",
+    "-ffunction-sections",
+]
+extra-link-args = [
+    "-Lhepware/lib",
+]
